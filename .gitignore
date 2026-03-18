@@ -1,0 +1,16 @@
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+
+# Sensitive data
+.env
+*.pem
+
+# Chrome extension packaging
+*.crx

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { box-sizing: border-box; }
+    body { width: 360px; min-height: 320px; max-height: 560px; margin: 0; padding: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; display: flex; flex-direction: column; }
+    h2 { margin: 0 0 12px 0; font-size: 15px; }
+    .screen { display: none; flex-direction: column; flex: 1; min-height: 0; }
+    .screen.active { display: flex; }
+    .btns { display: flex; flex-direction: column; gap: 8px; }
+    .btns button { padding: 10px 14px; cursor: pointer; border: none; border-radius: 8px; background: #1a73e8; color: #fff; font-size: 13px; font-weight: 500; text-align: left; }
+    .btns button:hover { background: #1557b0; }
+    .btns button.secondary { background: #5f6368; }
+    .btns button.secondary:hover { background: #4a4d51; }
+    .row-top { display: flex; gap: 8px; margin-bottom: 10px; }
+    .show-panel { flex: 1; padding: 10px 14px; cursor: pointer; border: none; border-radius: 8px; background: #34a853; color: #fff; font-size: 13px; font-weight: 500; }
+    .show-panel:hover { background: #2d9249; }
+    .prompt-config { padding: 10px 14px; cursor: pointer; border: none; border-radius: 8px; background: #5f6368; color: #fff; font-size: 13px; font-weight: 500; }
+    .prompt-config:hover { background: #4a4d51; }
+    .chk-immediate { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; font-size: 13px; cursor: pointer; }
+    .chk-immediate input { cursor: pointer; }
+    .prompt-title { margin: 0 0 10px 0; font-size: 14px; }
+    .prompt-label { display: block; margin: 10px 0 4px 0; font-size: 12px; color: #333; }
+    .prompt-ta { width: 100%; padding: 8px; font-size: 12px; border: 1px solid #dadce0; border-radius: 6px; resize: vertical; margin-bottom: 4px; box-sizing: border-box; }
+    .prompt-save { width: 100%; margin-top: 12px; padding: 10px; cursor: pointer; border: none; border-radius: 8px; background: #1a73e8; color: #fff; font-size: 13px; font-weight: 500; }
+    .prompt-save:hover { background: #1557b0; }
+    .back { align-self: flex-start; margin-bottom: 8px; padding: 6px 12px; font-size: 12px; cursor: pointer; border: 1px solid #dadce0; border-radius: 6px; background: #fff; }
+    .back:hover { background: #f1f3f4; }
+    .rendered { flex: 1; overflow: auto; margin: 0; padding: 12px; background: #f8f9fa; border-radius: 8px; font-size: 13px; line-height: 1.6; border: 1px solid #dadce0; white-space: pre-wrap; word-break: break-word; }
+    .empty { color: #5f6368; padding: 24px; text-align: center; }
+    .toast { position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); padding: 8px 14px; background: #323232; color: #fff; border-radius: 6px; font-size: 12px; z-index: 10; display: none; }
+    .toast.show { display: block; }
+  </style>
+</head>
+<body>
+  <div id="screen-main" class="screen active">
+    <h2>GT 분석 프로세스</h2>
+    <div class="row-top">
+      <button type="button" id="btn-show-panel" class="show-panel">팝업(패널) 보이기</button>
+      <button type="button" id="btn-prompt-config" class="prompt-config">prompt설정</button>
+    </div>
+    <label class="chk-immediate">
+      <input type="checkbox" id="chk-immediate" checked> 즉시실행
+    </label>
+    <div class="btns">
+      <button type="button" id="btn-step1">1단계: 개방 코딩</button>
+      <button type="button" id="btn-step2">2단계: 축 코딩</button>
+      <button type="button" id="btn-step3">3단계: 선택 코딩</button>
+      <button type="button" id="btn-combined" class="secondary">합쳐서 보기</button>
+      <button type="button" id="btn-scraps" class="secondary">답변 스크랩 모아보기</button>
+    </div>
+  </div>
+  <div id="screen-view" class="screen">
+    <button type="button" class="back" id="btn-back">← 뒤로</button>
+    <pre id="rendered" class="rendered"></pre>
+  </div>
+  <div id="screen-prompt" class="screen">
+    <button type="button" class="back" id="btn-prompt-back">← 뒤로</button>
+    <h3 class="prompt-title">프롬프트 편집</h3>
+    <label class="prompt-label">1단계: 개방 코딩</label>
+    <textarea id="prompt-step1" class="prompt-ta" rows="4"></textarea>
+    <label class="prompt-label">2단계: 축 코딩</label>
+    <textarea id="prompt-step2" class="prompt-ta" rows="4"></textarea>
+    <label class="prompt-label">3단계: 선택 코딩</label>
+    <textarea id="prompt-step3" class="prompt-ta" rows="4"></textarea>
+    <button type="button" id="btn-prompt-save" class="prompt-save">저장</button>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="popup.js"></script>
+</body>
+</html>

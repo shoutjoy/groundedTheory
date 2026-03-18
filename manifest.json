@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "근거 이론 코딩 어시스턴트",
+  "version": "1.0",
+  "permissions": ["clipboardWrite", "clipboardRead", "storage"],
+  "host_permissions": ["https://notebooklm.google.com/*", "https://mdproviewer.vercel.app/*"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://notebooklm.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://mdproviewer.vercel.app/*"],
+      "js": ["mdproviewer-paste.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
